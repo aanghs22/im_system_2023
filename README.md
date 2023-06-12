@@ -1,8 +1,8 @@
-# assignment_demo_2023
+# Adaption of assignment_demo_2023
 
 ![Tests](https://github.com/TikTokTechImmersion/assignment_demo_2023/actions/workflows/test.yml/badge.svg)
 
-This is a demo and template for backend assignment of 2023 TikTok Tech Immersion.
+This is an amended version of the demo and template shared for backend assignment of 2023 TikTok Tech Immersion.
 
 ## Installation
 
@@ -28,3 +28,14 @@ Check if it's running:
 ```bash
 curl localhost:8080/ping
 ```
+## Implementation Approach 
+_Implementaton is incomplete._
+
+Backend Database: Redis
+
+**Rough Flow**
+1. Client makes HTTP call to server. 
+2. Server makes RPC call to rpc-server in local network.
+3. rpc-server receives request (`SendRequest()` / `PullRequest()`) and processes it. 
+4. Type of request determines read/write from/to Redis backend.
+5. Data is sent back to HTTP server as a response to the client's request.
