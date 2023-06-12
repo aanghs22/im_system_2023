@@ -29,7 +29,7 @@ Check if it's running:
 curl localhost:8080/ping
 ```
 ## Implementation Approach 
-_Implementaton is incomplete._
+_Implementaton is in progress._
 
 Backend Database: Redis
 
