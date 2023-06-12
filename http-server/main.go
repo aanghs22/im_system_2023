@@ -50,10 +50,9 @@ func sendMessage(ctx context.Context, c *app.RequestContext) {
 	}
 	resp, err := cli.Send(ctx, &rpc.SendRequest{
 		Message: &rpc.Message{
-			Chat:   req.Query("Chat"),
-			Text:   req.Query("Text"),
-			Sender: req.Query("Sender"),
-			SendTime: time.Now().Unix()
+			Chat:   req.Chat,
+			Text:   req.Text,
+			Sender: req.Sender,
 		},
 	})
 	if err != nil {
@@ -61,21 +60,20 @@ func sendMessage(ctx context.Context, c *app.RequestContext) {
 	} else if resp.Code != 0 {
 		c.String(consts.StatusInternalServerError, resp.Msg)
 	} else {
-		c.Status(consts.StatusOK, resp.Msg)
+		c.Status(consts.StatusOK)
 	}
 }
 
 func pullMessage(ctx context.Context, c *app.RequestContext) {
 	var req api.PullRequest
 	err := c.Bind(&req)
-	chat := c.Query("Chat")
 	if err != nil {
 		c.String(consts.StatusBadRequest, "Failed to parse request body: %v", err)
 		return
 	}
 
 	resp, err := cli.Pull(ctx, &rpc.PullRequest{
-		Chat:    chat,
+		Chat:    req.Chat,
 		Cursor:  req.Cursor,
 		Limit:   req.Limit,
 		Reverse: &req.Reverse,
